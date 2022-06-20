@@ -1,3 +1,3 @@
-<script>
-
-</script>
+function titulodinamico() {
+  document.title = 'mellamoeva.es'
+}
