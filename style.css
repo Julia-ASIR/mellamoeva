@@ -1,3 +1,8 @@
+/*FUENTE MANJARI - GOOGLE FONTS*/
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manjari:wght@100&display=swap');
+</style>
+
 #nombre {
 	text-align: center;
 	font-size: 30px;
@@ -9,6 +14,7 @@
 #subtitulo {
 	text-align: center;
 	font-size: 25px;
+	font-family: Arial;
 	font-variant: small-caps;
 	color: black;
 }
@@ -16,6 +22,7 @@
 #tablaenlaces {
 	width: 550px;
 	height: 60px;
+	font-family: 'Manjari', sans-serif;
 	border: solid 1px;
 	border-color: black;
 }
