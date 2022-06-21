@@ -1,0 +1,32 @@
+#nombre {
+	text-align: center;
+	font-size: 30px;
+	text-decoration: underline;
+	color: black;
+}
+
+#subtitulo {
+	text-align: center;
+	font-size: 25px;
+	font-variant: small-caps;
+	color: black;
+}
+
+#tablaenlaces {
+	width: 550px;
+	height: 60px;
+	border: solid 1px;
+	border-color: black;
+}
+
+#descargasadvertencia {
+	margin: 0 auto;
+	width: 490px;
+	height: 95px;
+	border: solid 1px;
+	border-color: black;
+	text-align: center;
+	color: red;
+	font-weight: bold;
+	text-shadow: inherit;
+}
