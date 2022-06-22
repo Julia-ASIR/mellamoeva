@@ -1,0 +1,290 @@
+!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>mellamoeva.es</title>
+    <script src="js/script_titulo.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+  </head>
+  <body>
+
+  <!--INICIO ENCABEZADO-->
+  <div id="nombre">
+    <h3>Eva: la de Sistemas</h3>
+  </div>
+
+  <div id="subtitulo">
+    No tenía nada que hacer y me monté una web.
+  </div>
+  <!--FIN ENCABEZADO-->
+
+  <div id="menu">
+    <p>
+      <a href="../index.html">Inicio</a> | <a href="index.html#ultimas">Últimas noticias</a> | <br>
+    </p>
+  </div>
+  <hr>
+
+  <!--inicio noticia-->
+  <h3>ÍNDICE</h3>
+  <ul>
+    <li><a href="#paso1">1 - servidor gráfico</a></li>
+    <li><a href="#paso2">2 - atajo para la consola</a></li>
+    <li><a href="#paso3">3 - añadir tu usuario a sudo</a></li>
+    <li><a href="#paso4">4 - repositorios</li>
+    <li><a href="#paso5">5 - drivers</a></li>
+      <dd>
+        <li><a href="#paso50">5.0 - red </a></li>
+        <li><a href="#paso51">5.1 - microcódigo</a></li>
+        <li><a href="#paso52">5.2 - vídeo / nVidia, fuck you</a></li>
+      </dd>
+    <li><a href="#paso6">6 - Cabeceras y compiladores</a></li>
+    <li><a href="#paso7">7 - Arquitecturas, librerías y códecs</a></li>
+    <li><a href="#paso8">8 - Compresor de ficheros</a></li>
+    <li><a href="#opcionales">Pasos opcionales</a></li>
+  </ul>
+  <h1>Guía de post-instalación de Debian 11 Bullseye con Gnome</h1>
+  <p>
+    A pocas horas de finalizar el día 14 de agosto, se publicó oficialmente la versión 11 estable de Debian GNU/Linux, apodada con el nombre de proyecto "Bullseye".<br>
+    En Debian no se ha perdido esa tradición de ponerle el nombre de un personaje de Toy Story a cada versión del sistema.
+  </p>
+
+  <p>
+    Yo lo instalé el 15 de agosto, pero acabé volviendo a Buster debido a varios problemas.
+    <br>
+    No me malinterpretéis: nunca actualizo de forma tan rápida. Siempre dejo el año de rigor.
+  </p>
+
+  <p>
+    Aún así, recopilé en mi cuaderno los pasos que hago después de instalar Debian en mi ordenador, así que aquí, lo junto todo.<br>
+    Antes de continuar, quiero aclarar que esta guía está basada en <a href="https://pulpolibre.wordpress.com/2019/05/04/guia-basica-despues-de-instalar-debian-10/">"La guía Básica Después de Instalar Debian 10 Buster de PULPOLIBRE"</a> que fue la que mejor me funcionó cuando instalé Debian 10.
+  </p>
+
+  <h1><a href="#paso1" id="paso1"></a>Paso 1: cambiar el servidor gráfico a XOrg</h1>
+  <p>
+    Por defecto, Wayland es el servidor gráfico de Debian, pero algunas aplicaciones se niegan a abrirse si no utilizas el servidor X11.<br>
+    Para esto, debes cerrar tu sesión y buscar el icono de la rueda dentada que aparece en la esquina inferior derecha del selector de usuarios.<br>
+    Después, cambia a Gnome X11.
+  </p>
+
+  <h1><a href="#paso2" id="paso2"></a>Paso 2: añadir el atajo de teclado para abrir la consola de comandos</h1>
+  <p>
+    Si vienes de Ubuntu, sabrás que con las teclas Control + Alt + T, abres el terminal.<br>
+    En Debian, lo tienes que hacer tú a mano: abre el menú de aplicaciones, abre la configuración, después busca el menú "combinaciones de teclas" y toca en el botón "añadir nueva".
+  </p>
+
+  <p>
+    Ahora, rellena los campos con estos parámetros:
+    <ul>
+      <li><b>NOMBRE: </b>Consola de comandos.</li>
+      <li><b>COMANDO: </b>gnome-terminal <i>(No añadas mayúsculas ni puntos).</i></li>
+      <li><b>COMBINACIÓN:</b>Ctrl + Alt + T</li>
+    </ul>
+  </p>
+
+  <h1><a href="#paso3" id="paso3"></a>Paso 3: añadir tu usuario a sudo</h1>
+  <p>
+    En Debian, por defecto, no viene ningún usuario incluido en el fichero Sudoers (no como en Ubuntu) y, para esto, debes abrir la consola de comandos y escribir:<br>
+    <tt>su</tt><br>
+    <tt>gedit /etc/sudoers</tt>
+  </p>
+
+  <p>
+    Ahora, fíjate en la línea que dice <b><i>Allow members of group sudo to execute any command.</i></b><br>
+    Debajo de  <b>%sudo</b>, debes añadir la línea que te dejo abajo.<i>Cambia tuusuario por tu nombre de usuario real.</i> Guarda los cambios y cierra Gedit.
+  </p>
+
+  <p>
+    <tt>tuusuario ALL=(ALL:ALL) ALL</tt><br>
+    De momento, vamos a seguir trabajando sin sudo, así que más tarde, podrás comprobar si esto que acabas de hacer funciona. <b>No cierres la consola de comandos.</b>
+  </p>
+
+  <h1><a href="#paso4" id="paso4"></a>Paso 4: cambiar los repositorios</h1>
+  <p>
+    Ahora, escribe en el shell el comando <tt>gedit /etc/apt/sources.list</tt><br>
+    Borra sin miedo todo lo que hay escrito en ese fichero y remplázalo por lo siguiente:
+  </p>
+
+  <pre style="word-wrap: break-word; white-space: pre-wrap;">
+# FICHERO SOURCES.LIST PARA DEBIAN 11 BULLSEYE - REPOSITORIES FILE FOR BULLSEYE - POR / BY Eva Julia - INFORMATICA 2000
+# ARCHIVO ORIGINAL POR / ORIGINAL FILE BY https://gist.github.com/slav0nic
+
+#
+
+# ACTUALIZACIONES - UPDATES
+deb http://deb.debian.org/debian/ bullseye main contrib non-free
+deb http://deb.debian.org/debian/ bullseye-updates main contrib non-free
+deb http://deb.debian.org/debian bullseye-proposed-updates main contrib non-free
+
+# SEGURIDAD - SECURITY
+deb http://deb.debian.org/debian-security/ bullseye-security main contrib non-free
+
+# MULTIMEDIA
+deb https://www.deb-multimedia.org bullseye main non-free
+  </pre>
+
+  <p>
+    Guarda los cambios, cierra Gedit y copia y pega la siguiente orden:<br>
+    <tt>apt update -oAcquire::AllowInsecureRepositories=true && apt install deb-multimedia-keyring</tt>
+  </p>
+
+  <p>
+    Eso hará que se habilite el repositorio multimedia y que se instalen las firmas digitales del mismo. Después, actualizaremos el sistema operativo con <b>apt upgrade -y</b>
+  </p>
+
+  <h1><a href="#paso5" id="paso5"></a>Paso 5: instalación de controladores</h1>
+  <p>
+    En mi caso, me faltaban tres drivers: los de la tarjeta de red (que por el momento estaba funcionando con un driver libre que fallaba mucho), los de la tarjeta de vídeo y los del microcódigo del procesador.
+  </p>
+
+  <h2><a href="#paso50" id="paso50"></a>5.0 - driver de la tarjeta de red</h2>
+  <p>
+    Para esto, primero, haremos una búsqueda de los drivers que faltan con la instrucción <b>dmesg | grep firmware</b><br>
+    En la salida de la consola, me decía que no se habían cargado los ficheros de firmware de un dispositivo llamado <b>rtl_nic</b>.
+  </p>
+
+  <p>
+    Necesitamos saber el nombre del paquete para instalar el driver y, para averiguarlo, ejecutaremos la orden <b>apt-cache search rtl_nic</b><br>
+    Nos deberá devolver el nombre del paquete que, en este caso, se llama <b>firmware-realtek</b>.
+  </p>
+
+  <p>
+    Lo instalaremos con la orden <b>apt install firmware-realtek -y</b>
+  </p>
+
+  <h2><a href="#paso51" id="paso51"></a>5.1 - microcódigo de Intel</h2>
+  <p>
+    Ejecutamos la orden <b>apt install intel-microcode amd64-microcode -y</b>
+  </p>
+
+  <h2><a href="#paso52" id="paso52"></a>5.2 - driver de nVidia</h2>
+  <p>
+    Las gráficas de nVidia siempre han dado problemas con Linux.<br>
+    Tenemos dos alternativas: la primera es dejar el sistema funcionando con el driver libre (Nouveau), que para tareas básicas y para funcionamiento normal del equipo, funciona bien.<br>
+    Si necesitamos hacer cosas un poquito más sofisticadas (como usar OBS), lamentablemente nos veremos obligados a usar el driver privativo de nVidia, que además, no tiene ni la mitad de características que el de Windows. <i><a href="https://www.youtube.com/watch?v=_36yNWw_07g">Esto se merece un "nVidia, fuck you".</a></i>
+  </p>
+
+  <p>
+    Primero instalaremos y ejecutaremos el software que nos permite detectar qué modelo de gráfica tenemos: <b>apt install nvidia-detect -y && nvidia-detect</b>
+  </p>
+
+  <p>
+    En mi caso, el programa me dice que mi gráfica es una GeForce GT 720 y que debo instalar el paquete nvidia-driver, de modo que ejecutaremos lo siguiente <i>(deberás instalar el que el programa te diga)</i>:<br>
+    <b>apt install nvidia-driver</b>
+  </p>
+
+  <p>
+    Durante el proceso de instalación, el programa nos puede advertir que <b>el driver Nouveau genera conflictos</b>. Lo deshabilitaremos presionando enter sobre el botón que dice <b>De acuerdo</b>.
+  </p>
+
+  <h1><a href="#paso6" id="paso6"></a>Paso 6: instalar cabeceras y compiladores</h1>
+  <p>
+    Copia y pega lo siguiente en la consola:<br>
+    <tt>
+      apt install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') build-essential make automake cmake autoconf git aptitude synaptic
+    </tt>
+  </p>
+
+  <p>
+    Ahora, haremos un pequeño cambio para que el comando dpkg funcione:<br>
+    Copia y pega esto en la consola: <b>export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
+    </b>
+  </p>
+
+  <p>
+    Copia y pega esta otra y cambia la palabra en cursiva por tu nombre de usuario real:<br>
+    <b>echo 'export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin' >> /home/<i>usuario</i>/.bashrc
+    </b>
+  </p>
+
+  <h1><a href="#paso7" id="paso7"></a>Paso 7: instalación de la arquitectura de 32 bits, librerías y códecs</h1>
+  <p>
+    <ul>
+      <li><b>PRIMERO: </b>dpkg --add-architecture i386 && apt update</li>
+      <li><b>SEGUNDO: </b>apt install libstdc++6:i386 libgcc1:i386 zlib1g:i386 libncurses5:i386</li>
+      <li><b>TERCERO: </b>apt install w64codecs w32codecs libdvdcss2 gstreamer1.0-libav ffmpegthumbs
+      </li>
+    </ul>
+  </p>
+
+  <h1><a href="#paso8" id="paso8"></a>Paso 8: instalar PeaZIP</h1>
+  <p>
+    De forma predefinida, en cada entorno de escritorio para GNU/Linux, tenemos de serie un extractor de ficheros comprimidos. El que viene con Gnome (File Roller), tiene varios defectos: no es capaz de descomprimir ficheros .RAR, ficheros segmentados ni ficheros protegidos por contraseña; lo sustituiremos por PeaZIP.
+  </p>
+
+  <p>
+    Puedes descargarlo desde <a href="https://peazip.github.io/peazip-linux.html">https://peazip.github.io/peazip-linux.html</a> pero asegúrate que te descargas el paquete <b>DEB GTK2</b>. El <b>DEB QT5</b> no funciona bien: directamente, no se abre.
+  </p>
+
+  <p>
+    Una vez lo hayas descargado, abre la consola de comandos (si la has cerrado) y ejecuta:
+    <br>
+    <tt>su
+    dpkg -i peazip_8.1.0.LINUX.x86_64.GTK2.deb
+    </tt>
+  </p>
+
+  <p>
+    Si da error de dependencias incumplidas ejecuta la orden <b>apt --fix-broken install</b>
+  </p>
+
+  <h1><a href="#opcionales" id="opcionales"></a>Pasos opcionales (pero recomendados)</h1>
+  <h2>Instalación de Brasero, skin de Arch Linux, Hardinfo, Neofetch y tipografías de Microsoft</h2>
+
+  <p>
+    <tt>
+      apt install brasero arc-theme hardinfo neofetch ttf-mscorefonts-installer
+    </tt>
+  </p>
+
+  <h2>Instalación de ifconfig y tracepath</h2>
+  <p>
+    <tt>
+      apt install iputils-tracepath net-tools -y
+    </tt>
+  </p>
+
+  <h2>Instalación de Snap</h2>
+  <p>
+    <tt>
+      apt install snapd -y && snap install core
+    </tt>
+  </p>
+
+  <h2>Instalación de Shutter y Spotify</h2>
+  <p>
+    <ul>
+      <li><b>PRIMERO: </b>snap install shutter</li>
+      <li><b>SEGUNDO: </b>snap install spotify</li>
+    </ul>
+  </p>
+
+  <h2>Instalación de VLC y Clementine</h2>
+  <p>
+    <b>apt install vlc clementine -y</b>
+  </p>
+
+  <h2>Instalación de LibreOffice Base</h2>
+  <p>
+    Por defecto, el gestor de bases de datos de LibreOffice no viene incluido en Debian, cosa que no entiendo, porque los demás programas de la suite si que están. Yo lo suelo utilizar así que...<br>
+    <tt>apt install libreoffice-base -y</tt>
+  </p>
+
+  <h1>Limpieza y reinicio</h1>
+  <p>
+    Una vez hayamos terminado de hacer esto, es recomendable que limpiemos todos los archivos residuales que han quedado después de descargar paquetes y demás historias y reiniciar la máquina para que se apliquen todos los cambios que hemos hecho:<br>
+    <tt>
+      apt autoremove -y && reboot
+    </tt>
+  </p>
+
+  <h1>FIN</h1>
+  <p>
+    Ante cualquier duda, puedes contactar conmigo enviando un mail a la dirección del pie de página o por mensaje en GNUSocial o Twitter (los enlaces están disponibles en la página de inicio).
+  </p>
+
+
+  <!--fin noticia-->
+
+  </body>
+</html>
