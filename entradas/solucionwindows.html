@@ -1,0 +1,78 @@
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>mellamoeva.es</title>
+    <script src="js/script_titulo.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+  </head>
+  <body>
+
+  <!--INICIO ENCABEZADO-->
+  <div id="nombre">
+    <h3>Eva: la de Sistemas</h3>
+  </div>
+
+  <div id="subtitulo">
+    No tenía nada que hacer y me monté una web.
+  </div>
+  <!--FIN ENCABEZADO-->
+
+  <div id="menu">
+    <p>
+      <a href="../index.html">Inicio</a> | <a href="index.html#ultimas">Últimas noticias</a> | <br>
+    </p>
+  </div>
+  <hr>
+
+  <!--inicio noticia-->
+  <h1>Solución al error "Windows no puede completar la instalación"</h1>
+  <p>
+    A comienzos de febrero del 2021, recibí un portátil en mi taller el cual tenía que formatear e instalar Windows 7.
+  </p>
+
+  <p>
+    Me dispuse a hacer esta tarea que casi puedo hacer con los ojos cerrados de tantes veces.<br>
+    Todo iba bien hasta que el equipo hace el primer reinicio tras instalar Windows y, después te pide crear el primer usuario. Me salía un mensaje de error con una frase terrible: <i>Windows no puede completar la instalación</i>. El caso es que, hiciera lo que hiciera, no podía continuar.
+  </p>
+
+  <p>
+    No está de más decir que, los cazurros del foro de soporte de Microsoft no sabían absolutamente nada. Y es esto una de las cosas que odio de los foros de software no-libre. Y no me malinterpretéis, no quiero decir que no hayan cazurros en los foros de cualquier distro GNU/Linux, pero, normalmente acabas dando con la solución.
+  </p>
+
+  <h1>Instrucciones</h1>
+  <p>
+    <ul>
+      <li>
+        Cuando lleguemos a esa ventana de error, retiramos el USB o DVD de instalación y reiniciamos la máquina.
+      </li>
+      <li>
+        Antes de que aparezca el error de nuevo, presionamos las teclas Shift + F10.<br>
+        <i>En algunos portátiles la combinación será Shift + Fn + F10.</i>
+      </li>
+      <li>
+        En la consola de comandos, escribimos <b>cd %windir%/system32/oobe y presionamos Intro.</b>
+      </li>
+      <li>
+        Ahora, escribimos <b>msoobe</b> y nos esperamos un rato (aunque, no es lo común, podría tardar un rato largo).
+      </li>
+    </ul>
+  </p>
+
+  <p>
+    La pantalla se quedará negra, ¡no te asustes!, en unos instantes aparecerá la ventana que necesitamos para crear el primer usuario y poder finalizar la instalación.
+  </p>
+
+  <p>
+    Al acabar, la pantalla volverá a ponerse en negro y volveremos automáticamente a la consola de comandos.<br>
+    En ese momento, solo tenemos que cerrar la consola y el mensaje de error y la máquina se reiniciará sola.
+  </p>
+
+  <h1>Conclusión final</h1>
+  <p>
+    En un principio pensé que la imagen del USB de instalación podría estar corrupta, pero no, porque flashee otra imagen que tenía por ahí en otro pen distinto y el problema continuaba.<br>
+    No sé qué pasó que justamente esa máquina fue la que me dio el problema. Pero, si en algún momento os sucede, podéis leer esto y tal vez os sirva.
+  </p>
+  <!--fin noticia-->
+
+  </body>
+</html>
