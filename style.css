@@ -3,11 +3,13 @@
 	justify-content: center;
 }
 
+
+
 #ultimas, #pelacables, #tituloinspiracion {
 	font-family: Arial;
 }
 
-#defipela, #inspiracion {
+#defipela, #inspiracion, #menus {
 	font-family: Arial;
 	margin-left: 10px;
 	margin-right: 200px;
