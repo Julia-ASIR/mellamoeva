@@ -1,35 +1,20 @@
-#nombre {
-	text-align: center;
-	font-size: 30px;
-  font-family: Arial;
-	text-decoration: underline;
-	color: black;
+#banner {
+	display: flex;
+	justify-content: center;
 }
 
-#subtitulo {
-	text-align: center;
-	font-size: 25px;
+#ultimas, #pelacables, #tituloinspiracion {
 	font-family: Arial;
-	font-variant: small-caps;
-	color: black;
 }
 
-#tablaenlaces {
+#defipela, #inspiracion {
 	font-family: Arial;
-	width: 550px;
-	height: 60px;
-	border: solid 1px;
-	border-color: black;
+	margin-left: 10px;
+	margin-right: 200px;
 }
 
-#descargasadvertencia {
-	margin: 0 auto;
-	width: 490px;
-	height: 95px;
-	border: solid 1px;
-	border-color: black;
+footer {
 	text-align: center;
-	color: red;
+	font-family: Arial;
 	font-weight: bold;
-	text-shadow: inherit;
 }
