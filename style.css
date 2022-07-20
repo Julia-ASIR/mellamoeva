@@ -3,13 +3,19 @@
 	justify-content: center;
 }
 
-
+#menus {
+	font-family: Arial;
+	width: 550px;
+	height: 60px;
+	border: solid 1px;
+	border-color: black;
+}
 
 #ultimas, #pelacables, #tituloinspiracion {
 	font-family: Arial;
 }
 
-#defipela, #inspiracion, #menus {
+#defipela, #inspiracion {
 	font-family: Arial;
 	margin-left: 10px;
 	margin-right: 200px;
